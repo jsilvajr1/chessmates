@@ -1,0 +1,6 @@
+<h3>List of Chess games</h3>
+
+<% @games.reverse.each do |game| %>
+  <h5><%= game.name %></h5><br />
+  <%= link_to 'Game Details', game_path(game), class: 'btn btn-success' %>
+<% end %>
