@@ -47,7 +47,7 @@ class Piece < ApplicationRecord
   end
 
   def d_obs?(x,y)
-    if (self.location_x < x) && (self.location_y < y)
+    if (self.location_x < x) && (self.location_y < y) && (x-self.location_x == y-self.location_y)
       a = self.location_x
       b = self.location_y
       until (a == x) && (b == y)
@@ -57,7 +57,7 @@ class Piece < ApplicationRecord
           return true
         end
       end
-    elsif (self.location_x < x) && (self.location_y > y)
+    elsif (self.location_x < x) && (self.location_y > y) && (x-self.location_x == self.location_y-y)
       a = self.location_x
       b = self.location_y
       until (a == x) && (b == y)
@@ -67,7 +67,7 @@ class Piece < ApplicationRecord
           return true
         end
       end
-    elsif (self.location_x > x) && (self.location_y < y)
+    elsif (self.location_x > x) && (self.location_y < y) && (self.location_x-x == y-self.location_y)
       a = self.location_x
       b = self.location_y
       until (a == x) && (b == y)
@@ -77,7 +77,7 @@ class Piece < ApplicationRecord
           return true
         end
       end
-    elsif (self.location_x > x) && (self.location_y > y)
+    elsif (self.location_x > x) && (self.location_y > y) && (self.location_x-x == self.location_y-y)
       a = self.location_x
       b = self.location_y
       until (a == x) && (b == y)
