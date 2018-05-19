@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
 
   def index
     @games = Game.available
@@ -25,7 +25,9 @@ class GamesController < ApplicationController
   end
 
   def update
-    @game = Game.find(params[:id])
+    @game = Game.find_by_id(params[:id])
+    return render_not_found if @game.blank?
+
     @game.update_attributes(black_player_id: current_user.id)
 
     if @game.black_player_joined?
@@ -51,6 +53,6 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:game_name)
+    params.require(:game).permit(:game_name, :black_player_id)
   end
 end

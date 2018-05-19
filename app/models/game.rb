@@ -16,7 +16,7 @@ class Game < ApplicationRecord
 
 
   def black_player_joined?
-    black_player_id == current_user
+    black_player_id == self.black_player_id
   end
 
 end
