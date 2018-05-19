@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  
+
   has_many :pieces
 
   belongs_to :white_player, class_name: 'User'
@@ -12,4 +12,11 @@ class Game < ApplicationRecord
   def self.available
     where(black_player_id: nil)
   end
+
+
+
+  def black_player_joined?
+    black_player_id == current_user
+  end
+
 end
