@@ -8,8 +8,46 @@ RSpec.describe GamesController, type: :controller do
     end
   end
 
+  describe "games#update action" do
+
+    it "shouldn't allow unauthenticated users to join a game as the black player" do
+      game = FactoryBot.create(:game)
+      user2 = FactoryBot.create(:white_player)
+
+      patch :update, params: { id: game.id, game: { black_player_id: user2.id } }
+      expect(response).to redirect_to new_user_session_path
+
+      game.reload
+      expect(game.black_player_id).to eq(nil)
+      expect(game.white_player_id).to eq(game.white_player.id)
+    end
+
+    it "should allow users to join a game as the black player" do
+      game = FactoryBot.create(:game)
+      user2 = FactoryBot.create(:white_player)
+      sign_in user2
+
+      patch :update, params: { id: game.id, game: { black_player_id: user2.id } }
+      expect(flash[:notice]).to eq("You joined the game succesfully")
+      expect(response).to redirect_to game_path(game)
+
+      game.reload
+      expect(game.black_player_id).to eq (user2.id)
+		  expect(game.black_player_id).to eq(game.black_player.id)
+      expect(game.white_player_id).to eq (game.white_player.id)
+    end
+
+    it "should return a 404 error if a game cannot be found" do
+      user2 = FactoryBot.create(:white_player)
+      sign_in user2
+
+      patch :update, params: { id: 'BOOBOO', game: { black_player_id: user2.id } }
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+
   # describe "games#new action" do
-    
+
   #   it "should require users to be logged in" do
   #     get :new
   #     expect(response).to redirect_to new_user_session_path
@@ -30,7 +68,7 @@ RSpec.describe GamesController, type: :controller do
   #     post :create, params: { game: {game_name: 'ChessKing'} }
   #     expect(response).to redirect_to new_user_session_path
   #   end
-    
+
   #   it "should create a new game in the database" do
   #     user = FactoryBot.create(:white_player)
   #     sign_in user
@@ -101,7 +139,7 @@ RSpec.describe GamesController, type: :controller do
   #   end
 
   #   it "should return a 404 error if game with the specified id cannot be found" do
-  #     user_not_owner = FactoryBot.create(:white_player) # user necessary, else redirected to sign-in page 
+  #     user_not_owner = FactoryBot.create(:white_player) # user necessary, else redirected to sign-in page
   #     sign_in user_not_owner
   #     delete :destroy, params: { id: 'SPACEDUCK' }
   #     expect(response).to have_http_status(:not_found)
