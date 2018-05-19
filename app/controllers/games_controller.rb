@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy]
 
   def index
-    @games = Game.all
+    @games = Game.available
   end
 
   def new
@@ -10,7 +10,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = current_user.games.create(game_params)
+    @game = current_user.initiated_games.create(game_params)
 
     if @game.valid?
     redirect_to root_path
@@ -28,7 +28,7 @@ class GamesController < ApplicationController
     @game = Game.find_by_id(params[:id])
     return render_not_found if @game.blank?
 
-    if @game.user != current_user
+    if @game.white_player != current_user
       return render plain: 'Not Allowed!', status: :forbidden
     end
 
@@ -39,6 +39,6 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:name)
+    params.require(:game).permit(:game_name)
   end
 end

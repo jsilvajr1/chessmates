@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user do
+  factory :white_player, class: User do
     sequence :username do |u|
       "username#{u}"
     end
@@ -11,9 +11,9 @@ FactoryBot.define do
   end
 
   factory :game do
-    sequence :name do |a|
+    sequence :game_name do |a|
       "Game#{a}"
     end
-    association :user
+    association :white_player
   end
 end
