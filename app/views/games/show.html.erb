@@ -1,8 +1,7 @@
-<h3><%= @game.name %></h3><br />
-<h5>Created By: <%= @game.user.username %></h5>
+<h3><%= @game.game_name %></h3>
 
 <br /><br />
 
-<% if current_user && current_user == @game.user %>
+<% if current_user && current_user == @game.white_player %>
   <%= link_to 'Delete Game', game_path(@game), method: :delete, data: {confirm: 'Are you SURE you want to delete this game?'}, class: 'btn btn-danger' %>
 <% end %>
