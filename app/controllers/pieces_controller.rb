@@ -1,5 +1,8 @@
 class PiecesController < ApplicationController
   
+  def create
+  end
+
   def show
     @piece = Piece.find_by_id(params[:id])
     return render_not_found if @piece.blank?
