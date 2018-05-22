@@ -1,7 +1,11 @@
+
 <h3>List of Available Chess games</h3>
+
 
 <% @games.reverse.each do |game| %>
     <h4><%= game.game_name %></h4><br />
     <h5>Created By: <%= game.white_player.username %></h5>
     <%= link_to 'Game Details', game_path(game), class: 'btn btn-success' %>
+
 <% end %>
+
