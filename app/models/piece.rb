@@ -93,4 +93,18 @@ class Piece < ApplicationRecord
   def invalid(x,y)
     return "ERROR: Invalid Piece Path"
   end
+
+  def move_to!(new_x,new_y)
+    dest = game.pieces.find_by(location_x: new_x, location_y: new_y)
+
+    if dest
+      if dest.white != self.white
+        dest.captured = true
+      else
+        return "ERROR! Cannot move there; occupied by a friendly piece"
+      end
+    else
+      self.update_attributes(location_x: new_x, location_y: new_y)
+    end
+  end
 end
