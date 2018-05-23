@@ -1,4 +1,5 @@
 FactoryBot.define do
+
   factory :king do
     
   end
@@ -17,6 +18,7 @@ FactoryBot.define do
   factory :pawn do
     
   end
+
   factory :white_player, class: User do
     sequence :username do |u|
       "username#{u}"
