@@ -2,6 +2,14 @@ class Piece < ApplicationRecord
 
   belongs_to :game
 
+  def valid_move?(x,y)
+    destination_on_board?(x,y)
+  end
+
+  def destination_on_board?(x,y)
+    [x,y].all? { |e| (e >= 0) && (e <= 7) }
+  end
+
   def is_obstructed?(x,y)
     v_obs?(x,y) || h_obs?(x,y) || d_obs?(x,y) || invalid(x,y)
   end
