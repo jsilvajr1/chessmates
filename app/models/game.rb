@@ -21,10 +21,10 @@ class Game < ApplicationRecord
   def populate_game!
     piece_type = [Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
     (0..7).each do |i|
-      piece_type[i].create(location_x: i, location_y: 0, game_id: self.id, white: true)
-      Pawn.create(location_x: i, location_y: 1, game_id: self.id, white: true)
-      piece_type[i].create(location_x: i, location_y: 7, game_id: self.id, white: false)
-      Pawn.create(location_x: i, location_y: 6, game_id: self.id, white: false)
+      piece_type[i].create(location_x: i, location_y: 0, game_id: self.id, white: true, notcaptured: true)
+      Pawn.create(location_x: i, location_y: 1, game_id: self.id, white: true, notcaptured: true)
+      piece_type[i].create(location_x: i, location_y: 7, game_id: self.id, white: false, notcaptured: true)
+      Pawn.create(location_x: i, location_y: 6, game_id: self.id, white: false, notcaptured: true)
     end
   end
 end

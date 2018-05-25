@@ -1,4 +1,11 @@
-<h1>Piece Show Page</h1>
+<% if @piece.white %>
+<h1>Show Page for White <%= @piece.type %></h1>
+<% else %>
+<h1>Show Page for Black <%= @piece.type %></h1>
+<% end %>
+
+<br />
+<br />
 
 <div class="chessboard">
   <% (0..7).each do |col| %>

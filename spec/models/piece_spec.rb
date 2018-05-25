@@ -94,41 +94,39 @@ RSpec.describe Piece, type: :model do
 
   it "captures the opponent's piece on the intended destination, then assumes that position" do
     game = FactoryBot.create(:game)
-    white_piece = Piece.create(white: true, location_x: 0, location_y: 0, game_id: game.id)
-    black_piece = Piece.create(white: false, location_x: 7, location_y: 7, game_id: game.id, notcaptured: true)
+    whiteRook = game.pieces.find_by(location_x:0, location_y: 0)
+    dest = game.pieces.find_by(location_x: 7, location_y: 7) # this is blackRook
 
-    dest = game.pieces.find_by(location_x: 7, location_y: 7)
-    white_piece.move_to!(7,7)
+    whiteRook.move_to!(7,7)
     dest.reload
    
     expect(dest.notcaptured).to be false
-    expect(white_piece.location_x).to eq(7)
-    expect(white_piece.location_y).to eq(7) 
+    expect(whiteRook.location_x).to eq(7)
+    expect(whiteRook.location_y).to eq(7) 
   end
 
   it "generates an error message if a piece's destination is occupied by a friendly" do
     game = FactoryBot.create(:game)
-    white_piece = Piece.create(white: true, location_x: 0, location_y: 0, game_id: game.id)
-    other_white = Piece.create(white: true, location_x: 7, location_y: 7, game_id: game.id, notcaptured: true)
+    whiteRook = game.pieces.find_by(location_x:0, location_y: 0)
+    dest = game.pieces.find_by(location_x: 7, location_y: 1)
 
-    dest = game.pieces.find_by(location_x: 7, location_y: 7)
-    white_piece.move_to!(7,7)
+    whiteRook.move_to!(7,1)
 
-    expect(white_piece.move_to!(7,7)).to eq("ERROR! Cannot move there; occupied by a friendly piece")
+    expect(whiteRook.move_to!(7,1)).to eq("ERROR! Cannot move there; occupied by a friendly piece")
     expect(dest.notcaptured).to be true
-    expect(white_piece.location_x).to eq(0)
-    expect(white_piece.location_y).to eq(0) 
+    expect(whiteRook.location_x).to eq(0)
+    expect(whiteRook.location_y).to eq(0) 
   end
 
   it "updates the piece's position to [new_x, new_y] if the intended destination is empty" do
     game = FactoryBot.create(:game)
-    white_piece = Piece.create(white: true, location_x: 0, location_y: 0, game_id: game.id)
+    whiteRook = game.pieces.find_by(location_x:0, location_y: 0)
+    dest = game.pieces.find_by(location_x: 3, location_y: 3)
     
-    dest = game.pieces.find_by(location_x: 7, location_y: 7)
-    white_piece.move_to!(7,7)
+    whiteRook.move_to!(3,3)
 
     expect(dest).to be_nil
-    expect(white_piece.location_x).to eq(7)
-    expect(white_piece.location_y).to eq(7) 
+    expect(whiteRook.location_x).to eq(3)
+    expect(whiteRook.location_y).to eq(3) 
   end
 end

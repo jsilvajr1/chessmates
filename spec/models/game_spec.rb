@@ -15,7 +15,6 @@ RSpec.describe Game, type: :model do
 
   it "will generate all chess pieces when created" do
     game = FactoryBot.create(:game)
-    game.populate_game!
 
     isWhiteRook = game.pieces.find_by(location_x: 0, location_y: 0)
     isBlackPawn = game.pieces.find_by(location_x: 4, location_y: 6)
