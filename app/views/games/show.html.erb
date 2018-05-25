@@ -7,8 +7,23 @@
 <br /><br />
 
 
+<!--
 <div class="chessboard">
-      <!-- 1st ROW-->
+      <#% 4.times do %>
+            <#% 4.times do %>
+                  <div class="white"></div>
+                  <div class="black"></div>
+            <#% end %>
+            <#% 4.times do %>
+                  <div class="black"></div>
+                  <div class="white"></div>
+            <#% end %>
+      <#% end %>
+</div>
+-->
+
+<%= link_to 'ROOK', game_piece_path(@game.id, :piece => { :location_x => 0, :location_y => 0 }) %>
+<div class="chessboard">
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
@@ -17,7 +32,7 @@
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
-      <!-- 2nd ROW -->
+ 
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
@@ -26,7 +41,7 @@
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
-      <!-- 3rd ROW -->
+
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
@@ -35,7 +50,7 @@
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
-      <!-- 4th ROW -->
+
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
@@ -44,7 +59,7 @@
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
-      <!-- 5th ROW -->
+
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
@@ -53,7 +68,7 @@
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
-      <!-- 6th ROW -->
+
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
@@ -62,7 +77,7 @@
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
-      <!-- 7th ROW -->
+
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
@@ -71,7 +86,7 @@
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
-      <!-- 8th ROW -->
+
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
@@ -81,5 +96,3 @@
       <div class="black"></div>
       <div class="white"></div>
 </div>
-
-

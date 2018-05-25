@@ -1,7 +1,7 @@
 <h1>Piece Show Page</h1>
 
+<%= @piece.type %>
 <div class="chessboard">
-      <!-- 1st ROW-->
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
@@ -10,7 +10,7 @@
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
-      <!-- 2nd ROW -->
+ 
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
@@ -19,7 +19,7 @@
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
-      <!-- 3rd ROW -->
+
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
@@ -28,7 +28,7 @@
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
-      <!-- 4th ROW -->
+
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
@@ -37,7 +37,7 @@
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
-      <!-- 5th ROW -->
+
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
@@ -46,8 +46,8 @@
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
-      <!-- 6th ROW -->
-      <div class="black"></div>
+
+      <div class="black highlighted"><%= link_to 'X', game_piece_path(@piece.game.id, :piece => { :location_x => 0, :location_y => 2 }), method: :patch %></div>
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
@@ -55,7 +55,7 @@
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
-      <!-- 7th ROW -->
+
       <div class="white"></div>
       <div class="black"></div>
       <div class="white"></div>
@@ -64,7 +64,7 @@
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>
-      <!-- 8th ROW -->
+
       <div class="black"></div>
       <div class="white"></div>
       <div class="black"></div>

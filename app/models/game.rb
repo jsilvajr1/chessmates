@@ -13,10 +13,18 @@ class Game < ApplicationRecord
     where(black_player_id: nil)
   end
 
-
-
   def black_player_joined?
     black_player_id == self.black_player_id
   end
 
+  def populate_game!
+    piece_type = [Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
+    (0..7).each do |i|
+      piece_type[i].create(location_x: i, location_y: 0, game_id: self.id, white: true)
+      Pawn.create(location_x: i, location_y: 1, game_id: self.id, white: true)
+      piece_type[i].create(location_x: i, location_y: 7, game_id: self.id, white: false)
+      Pawn.create(location_x: i, location_y: 6, game_id: self.id, white: false)
+    end
+  end
 end
+
