@@ -11,9 +11,9 @@ p.alert {
   font-size: 17px;
 }
 
-.add a + a {
+.add a + a {          /* the "+" selects from 2nd child on */
   padding-left: 8px;
-} /* the "+" selects from 2nd child on */
+}
 
 .highlighted {
   background-color: yellow;
