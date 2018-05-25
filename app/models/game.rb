@@ -19,4 +19,15 @@ class Game < ApplicationRecord
     black_player_id == self.black_player_id
   end
 
+  def populate_game!
+    
+  end
+
+  def populate_black_pieces
+    populate_pawns (false)
+    populate_knights (false)
+  end
+
+
+
 end
