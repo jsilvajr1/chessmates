@@ -2,6 +2,14 @@ class Piece < ApplicationRecord
 
   belongs_to :game
 
+  def valid_move?(x,y)
+    destination_on_board?(x,y)
+  end
+
+  def destination_on_board?(x,y)
+    [x,y].all? { |e| (e >= 0) && (e <= 7) }
+  end
+
   def is_obstructed?(x,y)
     v_obs?(x,y) || h_obs?(x,y) || d_obs?(x,y) || invalid(x,y)
   end
@@ -93,4 +101,18 @@ class Piece < ApplicationRecord
   def invalid(x,y)
     return "ERROR: Invalid Piece Path"
   end
+
+  def move_to!(new_x,new_y)
+    dest = game.pieces.find_by(location_x: new_x, location_y: new_y)
+
+    if dest.nil?
+      self.update_attributes(location_x: new_x, location_y: new_y)
+    elsif dest.white != self.white
+      dest.update_attributes(notcaptured: false, location_x: nil, location_y: nil)
+      self.update_attributes(location_x: new_x, location_y: new_y)
+    else
+      return "ERROR! Cannot move there; occupied by a friendly piece"
+    end
+  end
 end
+

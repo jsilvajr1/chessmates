@@ -11,12 +11,10 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 20180520222800) do
-
+ActiveRecord::Schema.define(version: 20180522230447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
 
   create_table "games", force: :cascade do |t|
     t.string   "game_name"
@@ -34,9 +32,10 @@ ActiveRecord::Schema.define(version: 20180520222800) do
     t.integer  "location_y"
     t.string   "picture"
     t.boolean  "white"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "type"
+    t.boolean  "notcaptured"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,4 +55,5 @@ ActiveRecord::Schema.define(version: 20180520222800) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
+
 end
