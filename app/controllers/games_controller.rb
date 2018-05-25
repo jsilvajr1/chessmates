@@ -17,8 +17,6 @@ class GamesController < ApplicationController
     else
     render :new, status: :unprocessable_entity
     end
-
-    # @game.populate_game!
   end
 
   def show
