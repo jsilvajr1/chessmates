@@ -1,9 +1,10 @@
 class Game < ApplicationRecord
 
-  has_many :pieces
+  has_many :pieces, :dependent => :delete_all
 
   belongs_to :white_player, class_name: 'User'
   belongs_to :black_player, class_name: 'User', optional: true # was "required: false" but that seemed too strict
+  after_create :populate_game! # this runs the populate_game! method on a newly-created game
 
   validates :game_name, presence: true, length: { maximum: 140, minimum: 3 }
 

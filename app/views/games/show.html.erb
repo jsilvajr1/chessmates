@@ -6,93 +6,26 @@
 <% end %>
 <br /><br />
 
-
-<!--
 <div class="chessboard">
-      <#% 4.times do %>
-            <#% 4.times do %>
-                  <div class="white"></div>
-                  <div class="black"></div>
-            <#% end %>
-            <#% 4.times do %>
-                  <div class="black"></div>
-                  <div class="white"></div>
-            <#% end %>
-      <#% end %>
+  <% (0..7).each do |col| %>
+    <% (0..7).each do |row| %>
+      <% @piece = @game.pieces.find_by(location_x: row, location_y: col) %>
+        <% if @piece.nil? %>
+          <% if ((row % 2 == 0) && (col % 2 == 0)) || ((row % 2 != 0) && (col % 2 != 0)) %>
+            <div class="white"><%= @piece %></div>
+          <% else %>
+            <div class="black"><%= @piece %></div>
+          <% end %>
+        <% else %>
+          <% if ((row % 2 == 0) && (col % 2 == 0)) || ((row % 2 != 0) && (col % 2 != 0)) %>
+            <div class="white"><%= link_to @piece.type.chars[0], game_piece_path(@game.id, @piece.id) %></div>
+          <% else %>
+            <div class="black"><%= link_to @piece.type.chars[0], game_piece_path(@game.id, @piece.id) %></div>
+          <% end %>
+        <% end %>
+    <% end %>
+  <% end %>
 </div>
--->
 
-<%= link_to 'ROOK', game_piece_path(@game.id, :piece => { :location_x => 0, :location_y => 0 }) %>
-<div class="chessboard">
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
- 
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
 
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
 
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-      <div class="black"></div>
-      <div class="white"></div>
-</div>

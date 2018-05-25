@@ -18,14 +18,12 @@ class GamesController < ApplicationController
     render :new, status: :unprocessable_entity
     end
 
-    @game.populate_game!
+    # @game.populate_game!
   end
 
   def show
     @game = Game.find_by_id(params[:id])
     return render_not_found if @game.blank?
-
-    @piece = @game.pieces.find_by_location_x_and_location_y(params[:location_x],params[:location_y])
   end
 
   def update
