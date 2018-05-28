@@ -5,25 +5,23 @@
   <%= link_to 'Delete Game', game_path(@game), method: :delete, data: {confirm: 'Are you SURE you want to delete this game?'}, class: 'btn btn-danger' %>
 <% end %>
 
-
 <div class="chessboard">
- <% (0..7).each do |i| %>
-   <% (0..7).each do |j| %>
-     <% if i % 2 == 0 %>
-
-       <% if j % 2 == 0 %>
-           <div class="white"></div>
-       <% else %>
-            <div class="black"></div>
-       <% end %>
-
-     <% else %>
-       <% if j % 2 == 0 %>
-           <div class="black"></div>
-       <% else %>
-            <div class="white"></div>
-       <% end %>
-     <% end %>
-   <% end %>
- <% end %>
-</div>   
+  <% (0..7).each do |col| %>
+    <% (0..7).each do |row| %>
+      <% @piece = @game.pieces.find_by(location_x: row, location_y: col) %>
+        <% if @piece.nil? %>
+          <% if ((row % 2 == 0) && (col % 2 == 0)) || ((row % 2 != 0) && (col % 2 != 0)) %>
+            <div class="white"><%= @piece %></div>
+          <% else %>
+            <div class="black"><%= @piece %></div>
+          <% end %>
+        <% else %>
+          <% if ((row % 2 == 0) && (col % 2 == 0)) || ((row % 2 != 0) && (col % 2 != 0)) %>
+            <div class="white"><%= link_to @piece.type.chars[0], game_piece_path(@game.id, @piece.id) %></div>
+          <% else %>
+            <div class="black"><%= link_to @piece.type.chars[0], game_piece_path(@game.id, @piece.id) %></div>
+          <% end %>
+        <% end %>
+    <% end %>
+  <% end %>
+</div>
