@@ -10,7 +10,7 @@ class Piece < ApplicationRecord
     [x,y].all? { |e| (e >= 0) && (e <= 7) }
   end
 
-  def is_obstructed?(x,y)
+  def is_obstructed?(x,y) #checking if obstructed in any direction
     v_obs?(x,y) || h_obs?(x,y) || d_obs?(x,y) || invalid(x,y)
   end
 
@@ -32,6 +32,7 @@ class Piece < ApplicationRecord
         end
       end
     end
+    return false
   end
 
   def h_obs?(x,y)
@@ -52,6 +53,7 @@ class Piece < ApplicationRecord
         end
       end
     end
+    return false
   end
 
   def d_obs?(x,y)
