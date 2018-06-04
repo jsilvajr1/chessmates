@@ -1,6 +1,7 @@
 class Piece < ApplicationRecord
 
   belongs_to :game
+  scope :active, -> { where(notcaptured: nil) } 
 
   def valid_move?(x,y)
     destination_on_board?(x,y)
@@ -115,4 +116,3 @@ class Piece < ApplicationRecord
     end
   end
 end
-
