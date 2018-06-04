@@ -4,6 +4,7 @@ RSpec.describe Queen, type: :model do
   it "can move along a horizontal path" do
     game = FactoryBot.create(:game)
     queen = Queen.create(game_id: game.id, location_x: 4, location_y: 3)
+    # byebug
     move = queen.valid_move?(1,3)
 
     expect(move).to be true

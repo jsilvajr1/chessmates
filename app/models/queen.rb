@@ -9,7 +9,6 @@ class Queen < Piece
 
   # This method defines a valid path for the Queen piece, as instructed in piece.rb
   def valid_path?(x,y)
-    return true if (y == self.location_y && x != self.location_x) || (y != self.location_y && x == self.location_x) || (y - self.location_y).abs == (x - self.location_x).abs
-    return false
+   (y == self.location_y && x != self.location_x) || (y != self.location_y && x == self.location_x) || (y - self.location_y).abs == (x - self.location_x).abs
   end
 end
