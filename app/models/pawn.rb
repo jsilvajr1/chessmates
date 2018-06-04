@@ -3,28 +3,29 @@ class Pawn < Piece
   def valid_move?(dest_x, dest_y)
     return false unless super
     # Allow one place movement at a time
-    return false unless valid_fwd_move?(dest_x, dest_y)
-    return true
+    return valid_fwd_move?(dest_x, dest_y)
   end
 
-  def capture(dest_x, dest_y)
-    if self.white
-      (dest_y - self.location_y) == 1 && d_obs?(dest_x, dest_y) && (dest_x - self.location_x).abs == 1
-    else
-      (dest_y - self.location_y) == -1 && d_obs?(dest_x, dest_y) && (dest_x - self.location_x).abs == 1 
-    end
+  def diagonal_move?(dest_x, dest_y)
+    return (dest_x - self.location_x).abs == (dest_y - self.location_y).abs && (dest_x - self.location_x).abs == 1
   end
 
   def valid_fwd_move?(dest_x, dest_y)
+    return false unless dest_x == self.location_x || diagonal_move?(dest_x, dest_y) #&& capture_valid?(dest_x, dest_y)
     if has_moved? && self.white
-      (dest_y - self.location_y) == 1 && dest_x == self.location_x
+      (dest_y - self.location_y) == 1
     elsif has_moved? && !self.white
-      (dest_y - self.location_y) == -1 && dest_x == self.location_x
+      (dest_y - self.location_y) == -1
     elsif !has_moved? && self.white
-      (dest_y - self.location_y) == 2 && dest_x == self.location_x
+      [1,2].include?(dest_y - self.location_y)
     else
-      (dest_y - self.location_y) == -2 && dest_x == self.location_x
+      [-1,-2].include?(dest_y - self.location_y)
     end
+
+  end
+
+  def capture_valid?(dest_x, dest_y)
+    game.occupied?(dest_x, dest_y)
   end
 
   def has_moved?
