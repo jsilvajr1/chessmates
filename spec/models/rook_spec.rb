@@ -27,4 +27,12 @@ RSpec.describe Rook, type: :model do
     pawn = Pawn.create(location_x: 0, location_y: 5, game_id: game.id)
     expect(rook.valid_move?(0,7)).to be false
   end
+
+  it "shouldn't allow a rook to move non-linear (diagonal) on the board" do
+    game = FactoryBot.create(:game)
+    rook = Rook.create(location_x: 0, location_y: 3, game_id: game.id)
+    expect(rook.valid_move?(3,4)).to be false
+    expect(rook.valid_move?(4,5)).to be false
+    expect(rook.valid_move?(5,6)).to be false
+  end
 end
