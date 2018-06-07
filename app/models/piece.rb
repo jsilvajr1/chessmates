@@ -6,13 +6,18 @@ class Piece < ApplicationRecord
     destination_on_board?(x,y)
   end
 
+
+
   def destination_on_board?(x,y)
     [x,y].all? { |e| (e >= 0) && (e <= 7) }
   end
 
+
   def is_obstructed?(x,y) #checking if obstructed in any direction
     v_obs?(x,y) || h_obs?(x,y) || d_obs?(x,y) || invalid(x,y)
   end
+
+  
 
   def v_obs?(x,y)
     if (self.location_y < y) && (self.location_x == x)
@@ -35,6 +40,8 @@ class Piece < ApplicationRecord
     return false
   end
 
+  
+
   def h_obs?(x,y)
     if (self.location_x < x) && (self.location_y == y)
       count = self.location_x
@@ -55,6 +62,8 @@ class Piece < ApplicationRecord
     end
     return false
   end
+
+  
 
   def d_obs?(x,y)
     if (self.location_x < x) && (self.location_y < y) && (x-self.location_x == y-self.location_y)
@@ -100,9 +109,13 @@ class Piece < ApplicationRecord
     end
   end
 
-  def invalid(x,y)
-    return "ERROR: Invalid Piece Path"
+  
+  # Each Piece Type must Implement this logic in their Class
+  def valid_path?(x,y)
+    puts "This method needs to be defined in the piece's Unique Class;\ne.g. for the Queen piece, edit the Queen Class in queen.rb"
   end
+
+  
 
   def move_to!(new_x,new_y)
     dest = game.pieces.find_by(location_x: new_x, location_y: new_y)
