@@ -18,10 +18,6 @@ class Game < ApplicationRecord
     black_player_id == self.black_player_id
   end
 
-  def occupied?(dest_x,dest_y)
-    pieces.active.where(location_x: dest_x, location_y: dest_y).any?
-  end
-
   def populate_game!
     piece_type = [Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
     (0..7).each do |i|
@@ -32,3 +28,4 @@ class Game < ApplicationRecord
     end
   end
 end
+
