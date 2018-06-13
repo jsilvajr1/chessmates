@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180522230447) do
+ActiveRecord::Schema.define(version: 20180611113659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,9 @@ ActiveRecord::Schema.define(version: 20180522230447) do
     t.datetime "updated_at",      null: false
     t.integer  "white_player_id"
     t.integer  "black_player_id"
+    t.integer  "state"
     t.index ["black_player_id"], name: "index_games_on_black_player_id", using: :btree
+    t.index ["state"], name: "index_games_on_state", using: :btree
     t.index ["white_player_id"], name: "index_games_on_white_player_id", using: :btree
   end
 
