@@ -61,17 +61,17 @@
 <% if current_user %>
   <% if current_user == @game.white_player && white_king %>
     <% if white_king.can_castle?(0,0) %>
-      <%= link_to 'Kingside Castle - White Player', castle_game_piece_path(@game, white_king.id), class: 'btn btn-info' %>
+      <%= link_to 'Kingside Castle - White Player', castle_game_piece_path(@game, white_king.id, location_x: 0, location_y: 0 ), method: :patch, class: 'btn btn-info' %>
     <% end %>
     <% if white_king.can_castle?(7,0) %>
-      <%= link_to 'Queenside Castle - White Player', castle_game_piece_path(@game, white_king.id), class: 'btn btn-info' %>
+      <%= link_to 'Queenside Castle - White Player', castle_game_piece_path(@game, white_king.id), method: :patch, class: 'btn btn-info' %>
     <% end %>
   <% elsif current_user == @game.black_player && black_king %>
     <% if black_king.can_castle?(0,7) %>
-      <%= link_to 'Kingside Castle - Black Player', castle_game_piece_path(@game, black_king.id), class: 'btn btn-info' %>
+      <%= link_to 'Kingside Castle - Black Player', castle_game_piece_path(@game, black_king.id, location_x: 0, location_y: 7), method: :patch, class: 'btn btn-info' %>
     <% end %>
     <% if black_king.can_castle?(7,7) %>
-      <%= link_to 'Queenside Castle - Black Player', castle_game_piece_path(@game, black_king.id), class: 'btn btn-info' %>
+      <%= link_to 'Queenside Castle - Black Player', castle_game_piece_path(@game, black_king.id), method: :patch, class: 'btn btn-info' %>
     <% end %>
   <% end %>
 <% end %>
