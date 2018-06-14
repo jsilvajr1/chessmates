@@ -24,6 +24,26 @@ class Game < ApplicationRecord
     ! self.white_player_id.nil? && ! self.black_player_id.nil?
   end
 
+  def occupied?(dest_x,dest_y)
+    pieces.active.where(location_x: dest_x, location_y: dest_y).any?
+  end
+
+  def check?(is_white)
+    king = King.where(white: is_white)
+    opponents = pieces.active.where(white: !is_white)
+    opponents.each do |piece|
+      if piece.valid_move?(king.location_x, king.location_y)
+        @threatening_piece = piece
+        return true
+      end
+    end
+    false
+  end
+
+  #def checkmate?(white)
+  #  return false unless check?(white)
+  #end
+
   def populate_game!
     piece_type = [Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
     picture_type_white = ["&#9814;", "&#9816;", "&#9815;", "&#9812;", "&#9813;", "&#9815;", "&#9816;", "&#9814;"]
@@ -47,4 +67,3 @@ class Game < ApplicationRecord
     @pieces_by_col_then_row
   end
 end
-
