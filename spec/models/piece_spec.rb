@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
+  
+  # IS_OBSTRUCTED? METHOD TESTS: START = = = = = = = = = = = = = = = = =
+
   it "determines obstruction in a piece's vertical path going up" do
     game = FactoryBot.create(:game)
     piece1 = Piece.create(location_x: 5, location_y: 1, game_id: game.id)
@@ -81,18 +84,9 @@ RSpec.describe Piece, type: :model do
     expect(piece1.is_obstructed?(4,3)).to be true
   end
 
-  it "determines that a piece's path is invalid" do
-    game = FactoryBot.create(:game)
-    piece1 = Piece.create(location_x: 1, location_y: 3, game_id: game.id)
-    piece1.save!
-    piece2 = Piece.create(location_x: 2, location_y: 4, game_id: game.id)
-    piece2.save!
+  # IS_OBSTRUCTED? METHOD TESTS: END = = = = = = = = = = = = = = = = =
 
-    puts piece1.is_obstructed?(3,6).inspect
-
-    # expect(piece1.is_obstructed?(3,6)).to eq("ERROR: Invalid Piece Path")
-  end
-
+  # MOVE_TO! METHOD TESTS: START = = = = = = = = = = = = = = = = = = =
 
   it "captures the opponent's piece on the intended destination, then assumes that position" do
     game = FactoryBot.create(:game)
@@ -131,4 +125,13 @@ RSpec.describe Piece, type: :model do
     expect(whiteRook.location_x).to eq(3)
     expect(whiteRook.location_y).to eq(3) 
   end
+
+  it "makes all moves invalid when the game state is forfeited" do
+    piece = FactoryBot.create(:piece, {location_x: 4, location_y: 2})
+    piece.game.forfeited!
+
+    expect(piece.valid_move?(4,5)).to be false
+  end
+
+  # MOVE_TO! METHOD TESTS: END = = = = = = = = = = = = = = = = = = = = = = = = 
 end
