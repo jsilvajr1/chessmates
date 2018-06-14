@@ -123,7 +123,7 @@ class Piece < ApplicationRecord
 
   def can_castle?(rook_x, rook_y)
     rook = game.pieces.find_by(location_x: rook_x, location_y: rook_y)
-    # return false if self.has_moved? || rook.has_moved?
+    return false if self.has_moved? || rook.has_moved?
     # return false if self.in_check?
     return false if self.h_obs?(rook_x, rook_y)
     return true

@@ -38,7 +38,7 @@ class PiecesController < ApplicationController
       return render_not_found(:forbidden) if current_user == piece.game.white_player
     end
 
-    piece.castle!(params[:location_x],params[:location_y])
+    piece.castle!(params[:rook_x],params[:rook_y])
   end
 
   private
