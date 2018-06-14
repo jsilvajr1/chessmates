@@ -29,7 +29,7 @@ class Game < ApplicationRecord
   end
 
   def check?(is_white)
-    king = King.where(white: is_white)
+    king = King.find_by(white: is_white)
     opponents = pieces.active.where(white: !is_white)
     opponents.each do |piece|
       if piece.valid_move?(king.location_x, king.location_y)

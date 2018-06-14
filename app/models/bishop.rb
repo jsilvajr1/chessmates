@@ -1,6 +1,5 @@
 class Bishop < Piece
 
-  class Bishop < Piece
   def valid_move?(x, y)
     super(x, y)
     return false if is_obstructed?(x, y)

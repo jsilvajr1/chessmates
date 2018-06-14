@@ -9,7 +9,7 @@ class Piece < ApplicationRecord
   end
 
   def is_opponent?(piece)
-    piece.white == white
+    piece.white # == white
   end
 
 
@@ -107,7 +107,6 @@ class Piece < ApplicationRecord
     end
   end
 
-
   def move_to!(new_x,new_y)
     dest = game.pieces.find_by(location_x: new_x, location_y: new_y)
 
@@ -121,38 +120,4 @@ class Piece < ApplicationRecord
     end
   end
 
-  # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-
-  def can_castle?(rook_x, rook_y)
-    rook = game.pieces.find_by(location_x: rook_x, location_y: rook_y)
-    return false if self.has_moved? || rook.has_moved?
-    # return false if self.in_check?
-    return false if self.h_obs?(rook_x, rook_y)
-    return true
-  end
-
-  # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-  def castle!(rook_x, rook_y)
-    rook = game.pieces.find_by(location_x: rook_x, location_y: rook_y)
-
-    if (self.white && rook.white)
-      if rook.location_x < self.location_x
-        self.update_attributes(location_x: 1, location_y: 0)
-        rook.update_attributes(location_x: 2, location_y: 0)
-      elsif rook.location_x > self.location_x
-        self.update_attributes(location_x: 5, location_y: 0)
-        rook.update_attributes(location_x: 4, location_y: 0)
-      end
-    elsif !(self.white && rook.white)
-      if rook.location_x < self.location_x
-        self.update_attributes(location_x: 1, location_y: 7)
-        rook.update_attributes(location_x: 2, location_y: 7)
-      elsif rook.location_x > self.location_x
-        self.update_attributes(location_x: 5, location_y: 7)
-        rook.update_attributes(location_x: 4, location_y: 7)
-      end
-    end
-  end
 end
