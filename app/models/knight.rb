@@ -1,16 +1,12 @@
-class Knight < Piece
+def valid_move?(x, y)
+		return false if no_move?(x,y)
 
-  def valid_move?(x,y)
-    return false unless super(x,y)
-    x_diff = x_diff(x)
-    y_diff = y_diff(y)
-    if ((x_diff == 2) && (y_diff == 1))
-      return true
-    end
-
-    if ((y_diff == 2) && (x_diff == 1))
-      return true
-    end
-
-    return false
-  end
+		if  ((x - x_coordinate).abs == 2 && (y - y_coordinate).abs == 1) ||
+			((x - x_coordinate).abs == 1 && (y - y_coordinate).abs == 2 ) &&
+			((x != x_coordinate) && (y != y_coordinate))
+			return true
+		else
+			return false
+		end
+	end
+end
