@@ -15,6 +15,7 @@ class Piece < ApplicationRecord
     v_obs?(x,y) || h_obs?(x,y) || d_obs?(x,y)
   end
 
+
   def v_obs?(x,y)
     if (self.location_y < y) && (self.location_x == x)
       count = self.location_y
@@ -33,6 +34,7 @@ class Piece < ApplicationRecord
         end
       end
     end
+    return false
   end
 
   def h_obs?(x,y)
@@ -53,6 +55,7 @@ class Piece < ApplicationRecord
         end
       end
     end
+    return false
   end
 
   def d_obs?(x,y)
