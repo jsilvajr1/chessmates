@@ -134,4 +134,12 @@ RSpec.describe Piece, type: :model do
   end
 
   # MOVE_TO! METHOD TESTS: END = = = = = = = = = = = = = = = = = = = = = = = = 
+
+  it "should call the valid_move? method when a user moves a piece" do
+    piece = double("Rook")
+    allow(piece).to receive(:valid_move)
+    expect(piece).to receive(:move_to!).with(3,4).and_return(:valid_move?)
+    piece.move_to!(3,4)
+
+  end
 end
