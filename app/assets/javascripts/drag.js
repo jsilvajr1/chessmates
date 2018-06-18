@@ -4,7 +4,6 @@ $(function() {
 
   $(".droppable").droppable( {
     drop: function( event, ui ) {
-      debugger;
       var x = $(this).data("x");
       var y = $(this).data("y");
       var pieceId = ui.draggable.data("piece");
