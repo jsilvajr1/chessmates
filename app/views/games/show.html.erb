@@ -7,6 +7,8 @@
 <!-- Display Game Status  -->
 <% if @game.state %>
   <h3>Game Status: <%= @game.state %></h3>
+<% else %>
+  <h3>Game Status: undefined</h3>
 <% end %>
 
 <!-- Display "DELETE GAME" button to Game Creator -->
