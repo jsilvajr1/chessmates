@@ -49,10 +49,10 @@ class Game < ApplicationRecord
     picture_type_white = ["&#9814;", "&#9816;", "&#9815;", "&#9812;", "&#9813;", "&#9815;", "&#9816;", "&#9814;"]
     picture_type_black = ["&#9820;", "&#9822;", "&#9821;", "&#9818;", "&#9819;", "&#9821;", "&#9822;", "&#9820;"]
     (0..7).each do |i|
-      piece_type[i].create(location_x: i, location_y: 0, game_id: self.id, white: true, notcaptured: true, picture: picture_type_white[i])
-      Pawn.create(location_x: i, location_y: 1, game_id: self.id, white: true, notcaptured: true, picture: "&#9817;")
-      piece_type[i].create(location_x: i, location_y: 7, game_id: self.id, white: false, notcaptured: true, picture: picture_type_black[i])
-      Pawn.create(location_x: i, location_y: 6, game_id: self.id, white: false, notcaptured: true, picture: "&#9823;")
+      piece_type[i].create(location_x: i, location_y: 0, game_id: self.id, white: true, notcaptured: true, picture: picture_type_white[i], has_moved: false)
+      Pawn.create(location_x: i, location_y: 1, game_id: self.id, white: true, notcaptured: true, picture: "&#9817;", has_moved: false)
+      piece_type[i].create(location_x: i, location_y: 7, game_id: self.id, white: false, notcaptured: true, picture: picture_type_black[i], has_moved: false)
+      Pawn.create(location_x: i, location_y: 6, game_id: self.id, white: false, notcaptured: true, picture: "&#9823;", has_moved: false)
     end
   end
 
