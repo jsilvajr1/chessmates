@@ -1,9 +1,20 @@
 $(function() {
 
-  $(".draggable").draggable({ containment: '.chessboard' });
+  $(".draggable").draggable({
+    containment: '.chessboard',
+    cursor: 'move',
+    revert: function(){
+      if($(this).hasClass("revertPiece")){
+        $(this).removeClass("revertPiece");
+        return true;
+      } else {
+        return false;
+      };
+    }
+  });
 
-  $(".droppable").droppable( {
-    drop: function( event, ui ) {
+  $(".droppable").droppable({
+    drop: function(event,ui){
       var x = $(this).data("x");
       var y = $(this).data("y");
       var pieceId = ui.draggable.data("piece");
@@ -19,9 +30,14 @@ $(function() {
 
       $.ajax({
         url: url,
+        async: false, // considered bad practice, but couldn't figure out any other way :(
         type: 'PUT',
         headers: { 'X-CSRF-Token': token },
-        data: { piece: { location_x: x, location_y: y } }
+        data: { piece: { id: pieceId, location_x: x, location_y: y } },
+        error: function(jqXHR, textStatus, errorMsg){
+          var errorData = JSON.parse(jqXHR.responseText);
+          $("#piece_" + errorData.id).addClass("revertPiece");
+        }
       });
     }
   });

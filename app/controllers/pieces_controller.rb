@@ -20,9 +20,9 @@ class PiecesController < ApplicationController
     return render_not_found if piece.blank?
 
     if piece.white
-      return render_not_found(:forbidden) if current_user == piece.game.black_player 
+      return render_not_found(:forbidden, id: params[:id]) if current_user == piece.game.black_player 
     else
-      return render_not_found(:forbidden) if current_user == piece.game.white_player
+      return render_not_found(:forbidden, id: params[:id]) if current_user == piece.game.white_player
     end
 
     piece.update_attributes(piece_params)

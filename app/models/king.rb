@@ -4,6 +4,9 @@ class King < Piece
     return false unless super
     current_x = self.location_x
     current_y = self.location_y
+    if self.can_castle(x,y)
+      (x - current_x).abs == 2
+    end  
     (x - current_x).abs <= 1 && (y - current_y).abs <= 1
   end
 
