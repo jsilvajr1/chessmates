@@ -110,13 +110,15 @@ class Piece < ApplicationRecord
   def move_to!(new_x,new_y)
     dest = game.pieces.find_by(location_x: new_x, location_y: new_y)
 
-    if dest.nil?
+    if !self.valid_move?(new_x, new_y)
+      return "Can't Move There"
+    elsif dest.nil?
       self.update_attributes(location_x: new_x, location_y: new_y, has_moved: true)
     elsif dest.white != self.white # Checking if destination has an enemy_piece. Maybe pull into own method.
       dest.update_attributes(notcaptured: false, location_x: nil, location_y: nil)
       self.update_attributes(location_x: new_x, location_y: new_y, has_moved: true)
     else
-      return "ERROR! Cannot move there; occupied by a friendly piece"
+      return "ERROR! Cannot move there; occupied by your team's piece"
     end
   end
 
