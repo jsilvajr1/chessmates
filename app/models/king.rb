@@ -4,13 +4,13 @@ class King < Piece
     return false unless super
     current_x = self.location_x
     current_y = self.location_y
-    if self.can_castle(x,y)
-      (x - current_x).abs == 2
-    end  
+    # if self.can_castle(x,y)
+    #   (x - current_x).abs == 2
+    # end  
     (x - current_x).abs <= 1 && (y - current_y).abs <= 1
   end
 
-  def can_castle?(rook_x, rook_y)
+  def can_castle?(rook_x, rook_y, has_moved)
     rook = game.pieces.find_by(location_x: rook_x, location_y: rook_y)
     return false if self.has_moved? || rook.has_moved?
     # return false if game.check?(self.white)
@@ -18,7 +18,7 @@ class King < Piece
     return true
   end
 
-  def castle!(rook_x, rook_y)
+  def castle!(rook_x, rook_y, has_moved)
     rook = game.pieces.find_by(location_x: rook_x, location_y: rook_y)
 
     if (self.white && rook.white)
