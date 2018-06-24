@@ -3,10 +3,7 @@ class King < Piece
   def valid_move?(x,y)
     return false unless super
     current_x = self.location_x
-    current_y = self.location_y
-    # if self.can_castle(x,y)
-    #   (x - current_x).abs == 2
-    # end  
+    current_y = self.location_y 
     (x - current_x).abs <= 1 && (y - current_y).abs <= 1
   end
 
@@ -23,19 +20,19 @@ class King < Piece
 
     if (self.white && rook.white)
       if rook.location_x < self.location_x
-        self.update_attributes(location_x: 1, location_y: 0)
-        rook.update_attributes(location_x: 2, location_y: 0)
+        self.update_attributes(location_x: 1, location_y: 0, has_moved: true)
+        rook.update_attributes(location_x: 2, location_y: 0, has_moved: true)
       elsif rook.location_x > self.location_x
-        self.update_attributes(location_x: 5, location_y: 0)
-        rook.update_attributes(location_x: 4, location_y: 0)
+        self.update_attributes(location_x: 5, location_y: 0, has_moved: true)
+        rook.update_attributes(location_x: 4, location_y: 0, has_moved: true)
       end
     elsif !(self.white && rook.white)
       if rook.location_x < self.location_x
-        self.update_attributes(location_x: 1, location_y: 7)
-        rook.update_attributes(location_x: 2, location_y: 7)
+        self.update_attributes(location_x: 1, location_y: 7, has_moved: true)
+        rook.update_attributes(location_x: 2, location_y: 7, has_moved: true)
       elsif rook.location_x > self.location_x
-        self.update_attributes(location_x: 5, location_y: 7)
-        rook.update_attributes(location_x: 4, location_y: 7)
+        self.update_attributes(location_x: 5, location_y: 7, has_moved: true)
+        rook.update_attributes(location_x: 4, location_y: 7, has_moved: true)
       end
     end
   end
