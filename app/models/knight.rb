@@ -1,8 +1,7 @@
 class Knight < Piece
 
   def valid_move?(x, y)
-    return false unless super
-    return false unless valid_path?(x,y)
+    return false unless (super && valid_path?(x,y))
     return true
   end
 

@@ -1,9 +1,7 @@
 class Rook < Piece
 
   def valid_move?(x,y)
-    return false unless super
-    return false unless valid_path?(x,y)
-    return false if is_obstructed?(x,y)
+    return false unless (super && valid_path?(x,y) && !is_obstructed?(x,y))
     return true
   end
 
